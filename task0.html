@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Code - Task 0</title>
+    
+    <style>
+        /* --- ОБЩИЙ СИНИЙ ДИЗАЙН --- */
+        body {
+            background-color: #e6f0fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            overflow-x: hidden;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* Декоративные круги на фоне */
+        .circle-1, .circle-2 {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #cce0ff;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        .circle-1 { width: 250px; height: 250px; top: 10%; left: 10%; }
+        .circle-2 { width: 300px; height: 300px; bottom: -5%; right: 5%; }
+
+        h1 {
+            color: #1a365d;
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .content-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(150, 180, 255, 0.2);
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+            box-sizing: border-box;
+        }
+
+        /* Стили для кода */
+        pre {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f8faff;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 0;
+        }
+
+        /* --- КНОПКИ ПЕРЕКЛЮЧЕНИЯ ЗАДАНИЙ (PREV / NEXT) --- */
+        .task-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        
+        .nav-arrow-btn {
+            background-color: white;
+            color: #1a365d;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 2px solid #cce0ff;
+            box-shadow: 0 4px 10px rgba(150, 180, 255, 0.2);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+        .nav-arrow-btn:hover {
+            background-color: #cce0ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(150, 180, 255, 0.4);
+        }
+
+        /* --- НИЖНИЕ КНОПКИ HOME И TASKS --- */
+        .action-buttons { 
+            display: flex; 
+            gap: 20px; 
+            width: 100%; 
+            justify-content: center; 
+        }
+        .main-btn {
+            display: block;
+            padding: 15px 40px;
+            background-color: #7a9cc6;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: background-color 0.3s;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(26, 54, 93, 0.3);
+            width: 200px;
+        }
+        .main-btn:hover { background-color: #6a8cb6; }
+        
+        .btn-tasks { background-color: #1a365d; }
+        .btn-tasks:hover { background-color: #2b4c7e; }
+    </style>
+</head>
+<body>
+
+    <!-- Декоративные круги -->
+    <div class="circle-1"></div>
+    <div class="circle-2"></div>
+
+    <h1>C# Code</h1>
+
+    <!-- Основной блок с заданием -->
+    <div class="content-box">
+        <pre>
+using System;
+
+class ABBA
+{
+    static int Factorial(int n)
+    {
+        if (n == 1) return 1;
+        return n * Factorial(n - 1);
+    }
+
+    static void Main(string[] args)
+    {
+        Console.WriteLine("ABBA!");
+        Console.Write("Enter number of vowels: ");
+        int vowels = int.Parse(Console.ReadLine());
+
+        Console.Write("Enter number of consonants: ");
+        int consonants = int.Parse(Console.ReadLine());
+
+        Console.WriteLine(Factorial(vowels) * Factorial(consonants));
+    }
+}
+        </pre>
+    </div>
+
+    <!-- Кнопки навигации по заданиям -->
+    <div class="task-nav-buttons">
+        <!-- Возврат к списку заданий -->
+        <a href="tasks.html" class="nav-arrow-btn">← All Tasks</a>
+        
+        <!-- Переход к следующему заданию (Task 1) -->
+        <a href="task1.html" class="nav-arrow-btn">Next Task →</a>
+    </div>
+
+    <!-- Нижние кнопки Home и Tasks -->
+    <div class="action-buttons">
+        <a href="index.html" class="main-btn">Home</a>
+        <a href="tasks.html" class="main-btn btn-tasks">Tasks</a>
+    </div>
+
+</body>
+</html>

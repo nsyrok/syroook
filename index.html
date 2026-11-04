@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anastasiya Syrakvash - Premium Portfolio</title>
+    <style>
+        /* --- ГЛОБАЛЬНОЕ ЦЕНТРИРОВАНИЕ --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #e6f0fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1a365d;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрируем всё по горизонтали */
+            justify-content: center; /* Центрируем всё по вертикали (опционально) */
+            overflow-x: hidden;
+            padding: 20px; /* Отступы по краям */
+        }
+
+        /* Background circles */
+        .bg-circle {
+            position: fixed;
+            border-radius: 50%;
+            background-color: #cce0ff;
+            opacity: 0.5;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+        .bg-c1 { width: 300px; height: 300px; top: -50px; left: -50px; }
+        .bg-c2 { width: 400px; height: 400px; bottom: -100px; right: -100px; animation-delay: 3s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            width: 100%;
+            max-width: 1000px; /* Ограничиваем ширину шапки */
+        }
+        header h1 {
+            font-size: 48px;
+            color: #1a365d;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(26, 54, 93, 0.1);
+        }
+        header p {
+            font-size: 20px;
+            color: #4a7ab5;
+            font-weight: 500;
+        }
+
+        /* Content (ЦЕНТРИРОВАНИЕ КАРТОЧЕК) */
+        .container {
+            width: 100%;
+            max-width: 1000px; /* Максимальная ширина контента */
+            display: flex;
+            justify-content: center; /* Карточки по центру */
+            gap: 30px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(150, 180, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            border-top: 5px solid #cce0ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 300px;
+            flex-shrink: 0; /* Запрещаем сжиматься */
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(150, 180, 255, 0.4);
+        }
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1a365d;
+        }
+        .card p {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #1a365d;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        .btn:hover { background-color: #2b4c7e; }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            color: #7a9cc6;
+            font-size: 14px;
+            width: 100%;
+            max-width: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background -->
+    <div class="bg-circle bg-c1"></div>
+    <div class="bg-circle bg-c2"></div>
+
+    <!-- Header -->
+    <header>
+        <h1>Anastasiya Syrakvash</h1>
+        <p>🎓 Student (Group 1451) | 🐞 QA Tester | ✈️ Traveler | 🗣️ Language Learner</p>
+    </header>
+
+    <!-- Content -->
+    <div class="container">
+        
+        <!-- Card 1: Handouts -->
+        <div class="card">
+            <h2>📚 Handouts</h2>
+            <p>My handwritten notes and course handouts (PDF format).</p>
+            <a href="handouts.html" class="btn">Open Handouts</a>
+        </div>
+
+        <!-- Card 2: Tasks -->
+        <div class="card">
+            <h2>💻 Lab Works</h2>
+            <p>Assembly language assignments, practical tasks, and documentation.</p>
+            <a href="tasks.html" class="btn">View Tasks</a>
+        </div>
+
+        <!-- Card 3: About Me -->
+        <div class="card">
+            <h2>👩‍💻 About Me</h2>
+            <p>A little more information about me, my skills, and my projects.</p>
+            <a href="about.html" class="btn">Read More</a>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2026 Anastasiya Syrakvash. Premium Edition.
+    </footer>
+
+</body>
+</html>

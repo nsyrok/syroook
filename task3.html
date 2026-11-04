@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamming Code - Task 3</title>
+    
+    <style>
+        /* --- ОБЩИЙ СИНИЙ ДИЗАЙН --- */
+        body {
+            background-color: #e6f0fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            overflow-x: hidden;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* Декоративные круги на фоне */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #cce0ff;
+            opacity: 0.4;
+            z-index: -1;
+        }
+        .bg-c1 { width: 250px; height: 250px; top: 10%; left: 5%; }
+        .bg-c2 { width: 300px; height: 300px; bottom: -5%; right: 5%; }
+
+        h1 {
+            color: #1a365d;
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .calc-card {
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(150, 180, 255, 0.4);
+            padding: 30px 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            width: 150px;
+            padding: 10px;
+            border: 2px solid #cce0ff;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            color: #1a365d;
+            outline: none;
+        }
+        input[type="text"]:focus { border-color: #4a7ab5; }
+
+        .calc-btn {
+            background-color: #cce0ff;
+            color: #1a365d;
+            border: none;
+            padding: 10px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .calc-btn:hover { background-color: #a3c4ff; }
+
+        /* --- СХЕМА ВЕННА --- */
+        .venn-container {
+            position: relative;
+            width: 400px;
+            height: 350px;
+            margin: 20px auto;
+            display: none;
+        }
+
+        .venn-circle {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            opacity: 0.4;
+        }
+
+        .vc-green { background-color: #a8d5ba; top: 0; left: 90px; }
+        .vc-blue { background-color: #a8c0d5; top: 100px; left: 20px; }
+        .vc-red { background-color: #d5a8a8; top: 100px; left: 160px; }
+
+        .num-box {
+            position: absolute;
+            width: 40px;
+            height: 30px;
+            background-color: white;
+            border: 1px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+            z-index: 10;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .pos-1 { top: 40px; left: 180px; }
+        .pos-2 { top: 140px; left: 90px; }
+        .pos-3 { top: 140px; left: 260px; }
+        .pos-int-12 { top: 110px; left: 140px; }
+        .pos-int-13 { top: 110px; left: 220px; }
+        .pos-int-23 { top: 190px; left: 180px; }
+        .pos-center { top: 160px; left: 180px; }
+
+        .venn-label {
+            position: absolute;
+            font-size: 14px;
+            color: #1a365d;
+            font-weight: bold;
+            text-align: center;
+            width: 100px;
+        }
+        .lbl-1 { top: 230px; left: 150px; }
+        .lbl-2 { top: 200px; left: 10px; }
+        .lbl-4 { top: 200px; left: 290px; }
+
+        .result-text {
+            font-size: 22px;
+            color: #1a365d;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* --- КНОПКИ ПЕРЕКЛЮЧЕНИЯ ЗАДАНИЙ (PREV / NEXT) --- */
+        .task-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        
+        .nav-arrow-btn {
+            background-color: white;
+            color: #1a365d;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 2px solid #cce0ff;
+            box-shadow: 0 4px 10px rgba(150, 180, 255, 0.2);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+        .nav-arrow-btn:hover {
+            background-color: #cce0ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(150, 180, 255, 0.4);
+        }
+
+        /* --- НИЖНИЕ КНОПКИ HOME И TASKS --- */
+        .action-buttons { 
+            display: flex; 
+            gap: 20px; 
+            width: 100%; 
+            justify-content: center; 
+        }
+        .main-btn {
+            display: block;
+            padding: 15px 40px;
+            background-color: #7a9cc6;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: background-color 0.3s;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(26, 54, 93, 0.3);
+            width: 200px;
+        }
+        .main-btn:hover { background-color: #6a8cb6; }
+        
+        .btn-tasks { background-color: #1a365d; }
+        .btn-tasks:hover { background-color: #2b4c7e; }
+    </style>
+</head>
+<body>
+
+    <!-- Декоративные фоновые круги -->
+    <div class="bg-circle bg-c1"></div>
+    <div class="bg-circle bg-c2"></div>
+
+    <h1>Hamming Code</h1>
+
+    <div class="calc-card">
+        <div class="input-group">
+            <input type="text" id="dataInput" placeholder="e.g. 1011" maxlength="4" value="1011">
+            <button class="calc-btn" onclick="drawVenn()">Calculate</button>
+        </div>
+
+        <!-- Схема Венна -->
+        <div class="venn-container" id="venn-diagram">
+            <div class="venn-circle vc-green"></div>
+            <div class="venn-circle vc-blue"></div>
+            <div class="venn-circle vc-red"></div>
+
+            <div class="num-box pos-1" id="box-1"></div>
+            <div class="num-box pos-2" id="box-2"></div>
+            <div class="num-box pos-3" id="box-4"></div>
+            
+            <div class="num-box pos-int-12" id="box-3">1</div>
+            <div class="num-box pos-int-13" id="box-5">1</div>
+            <div class="num-box pos-int-23" id="box-6">1</div>
+            
+            <div class="num-box pos-center" id="box-7">1</div>
+
+            <div class="venn-label lbl-1">Position 1</div>
+            <div class="venn-label lbl-2">Position 2</div>
+            <div class="venn-label lbl-4">Position 4</div>
+        </div>
+
+        <div class="result-text" id="result-text"></div>
+    </div>
+
+    <!-- Кнопки "Назад" и "Вперед" (в один ряд) -->
+    <div class="task-nav-buttons">
+        <a href="task2.html" class="nav-arrow-btn">← Previous Task</a>
+        <a href="task4.html" class="nav-arrow-btn">Next Task →</a>
+    </div>
+
+    <!-- Нижние кнопки Home и Tasks -->
+    <div class="action-buttons">
+        <a href="index.html" class="main-btn">Home</a>
+        <!-- ИСПРАВЛЕНО: убрана точка перед tasks.html -->
+        <a href="tasks.html" class="main-btn btn-tasks">Tasks</a>
+    </div>
+
+    <script>
+        function drawVenn() {
+            let input = document.getElementById('dataInput').value.trim();
+            
+            if (input.length !== 4 || !/^[01]+$/.test(input)) {
+                alert("Please enter exactly 4 bits (0 or 1). Example: 1011");
+                return;
+            }
+
+            let bits = input.split('').map(Number);
+            
+            let d1 = bits[0];
+            let d2 = bits[1];
+            let d3 = bits[2];
+            let d4 = bits[3];
+
+            document.getElementById('box-3').textContent = d1;
+            document.getElementById('box-5').textContent = d2;
+            document.getElementById('box-6').textContent = d3;
+            document.getElementById('box-7').textContent = d4;
+
+            let p1 = (d1 + d2 + d4) % 2;
+            let p2 = (d1 + d3 + d4) % 2;
+            let p4 = (d2 + d3 + d4) % 2;
+
+            document.getElementById('box-1').textContent = p1;
+            document.getElementById('box-2').textContent = p2;
+            document.getElementById('box-4').textContent = p4;
+
+            document.getElementById('venn-diagram').style.display = 'block';
+
+            let finalCode = `${p1}${p2}${d1}${p4}${d2}${d3}${d4}`;
+            
+            let resultDiv = document.getElementById('result-text');
+            resultDiv.textContent = "Final code: " + finalCode;
+            resultDiv.style.display = 'block';
+        }
+        
+        window.onload = drawVenn;
+    </script>
+</body>
+</html>

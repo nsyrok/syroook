@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Works - Anastasiya Syrakvash</title>
+    <style>
+        /* --- ОБЩИЙ СИНИЙ ДИЗАЙН --- */
+        body {
+            background-color: #e6f0fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1a365d;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: #1a365d;
+            text-align: center;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #4a7ab5;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* --- КОНТЕЙНЕР ДЛЯ СПИСКА ЗАДАНИЙ --- */
+        .tasks-container {
+            width: 100%;
+            max-width: 850px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        /* --- КАРТОЧКА ОДНОГО ЗАДАНИЯ --- */
+        .task-item {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(150, 180, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 5px solid #cce0ff;
+        }
+        .task-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(150, 180, 255, 0.4);
+        }
+
+        .task-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 20px;
+            color: #1a365d;
+        }
+        .task-info p {
+            margin: 0;
+            color: #555;
+            font-size: 15px;
+        }
+
+        /* Кнопка открытия задания */
+        .view-btn {
+            background-color: #1a365d;
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        .view-btn:hover { background-color: #2b4c7e; }
+
+        /* --- НИЖНИЕ КНОПКИ НАВИГАЦИИ (ВСЕ ОДНОГО ЦВЕТА) --- */
+        .action-buttons { 
+            display: flex; 
+            gap: 15px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+        }
+        
+        .main-btn {
+            display: block;
+            padding: 15px 30px;
+            background-color: #1a365d; /* Темно-синий цвет для ВСЕХ кнопок */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(26, 54, 93, 0.2);
+            width: 180px;
+        }
+        .main-btn:hover { 
+            background-color: #2b4c7e; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(26, 54, 93, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Lab Works</h1>
+    <p class="subtitle">Select a task below to view the interactive solution.</p>
+
+    <!-- Список заданий -->
+    <div class="tasks-container">
+        
+        <!-- Task 0 -->
+        <div class="task-item">
+            <div class="task-info">
+                <h3>Task 0: C# Code</h3>
+                <p>Basic C# Console Application code structure.</p>
+            </div>
+            <a href="task0.html" class="view-btn">Open</a>
+        </div>
+
+        <!-- Task 1 -->
+        <div class="task-item">
+            <div class="task-info">
+                <h3>Task 1: Factorial calculation</h3>
+                <p>Calculate the product of two factorials (N1! * N2!).</p>
+            </div>
+            <a href="task1.html" class="view-btn">Open</a>
+        </div>
+
+        <!-- Task 2 -->
+        <div class="task-item">
+            <div class="task-info">
+                <h3>Task 2: Bitwise operations</h3>
+                <p>Interactive calculator for AND (&), OR (|), and XOR (^) operations.</p>
+            </div>
+            <a href="task2.html" class="view-btn">Open</a>
+        </div>
+
+        <!-- Task 3 -->
+        <div class="task-item">
+            <div class="task-info">
+                <h3>Task 3: Hamming Code</h3>
+                <p>Visual Venn diagram for calculating Hamming code parity bits.</p>
+            </div>
+            <a href="task3.html" class="view-btn">Open</a>
+        </div>
+
+        <!-- Task 4 -->
+        <div class="task-item">
+            <div class="task-info">
+                <h3>Task 4: Binary algorithm</h3>
+                <p>Calculate H = K * lb(N) (Logarithm base 2).</p>
+            </div>
+            <a href="task4.html" class="view-btn">Open</a>
+        </div>
+
+        <!-- Task 5 -->
+        <div class="task-item">
+            <div class="task-info">
+                <h3>Task 5: Shannon Entropy</h3>
+                <p>Calculate H(X) = -∑ p(i) * log2 p(i) based on custom probabilities.</p>
+            </div>
+            <a href="task5.html" class="view-btn">Open</a>
+        </div>
+
+        <!-- Task 6 -->
+        <div class="task-item">
+            <div class="task-info">
+                <h3>Task 6: RSA encryption algorithm</h3>
+                <p>Supervised Guided Independent Work (DL) on RSA encryption.</p>
+            </div>
+            <a href="task6.html" class="view-btn">Open</a>
+        </div>
+
+        <!-- Task 7 -->
+        <div class="task-item">
+            <div class="task-info">
+                <h3>Task 7: Nash Equilibrium</h3>
+                <p>Prisoner's Dilemma simulation demonstrating Nash Equilibrium.</p>
+            </div>
+            <a href="task7.html" class="view-btn">Open</a>
+        </div>
+
+    </div>
+
+    <!-- Нижние кнопки навигации -->
+    <div class="action-buttons">
+        <a href="index.html" class="main-btn">Home</a>
+        <a href="handouts.html" class="main-btn">Handouts</a>
+        <a href="about.html" class="main-btn">About Me</a>
+    </div>
+
+</body>
+</html>

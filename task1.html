@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial Calculation - Task 1</title>
+    
+    <style>
+        /* --- ОБЩИЙ СИНИЙ ДИЗАЙН --- */
+        body {
+            background-color: #e6f0fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            overflow-x: hidden;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* Декоративные круги на фоне */
+        .circle-1, .circle-2 {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #cce0ff;
+            opacity: 0.6;
+            z-index: -1;
+        }
+        .circle-1 { width: 200px; height: 200px; top: 10%; left: 10%; }
+        .circle-2 { width: 300px; height: 300px; bottom: -5%; right: 5%; }
+
+        h1 {
+            color: #1a365d;
+            font-size: 42px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .calc-card {
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(150, 180, 255, 0.4);
+            padding: 40px 50px;
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Поля ввода */
+        input[type="number"] {
+            width: 70px;
+            padding: 12px;
+            border: 2px solid #cce0ff;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            color: #1a365d;
+            outline: none;
+        }
+        input[type="number"]:focus { border-color: #4a7ab5; }
+        
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .symbol { font-size: 22px; color: #1a365d; font-weight: bold; }
+
+        /* Кнопка Calculate */
+        .calc-btn {
+            background-color: #cce0ff;
+            color: #1a365d;
+            border: none;
+            padding: 12px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .calc-btn:hover { background-color: #a3c4ff; }
+
+        #result {
+            display: block;
+            font-size: 24px;
+            color: #1a365d;
+            margin-bottom: 15px;
+            font-weight: bold;
+            min-height: 30px;
+        }
+
+        /* --- КНОПКИ ПЕРЕКЛЮЧЕНИЯ ЗАДАНИЙ (PREV / NEXT) --- */
+        .task-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        
+        .nav-arrow-btn {
+            background-color: white;
+            color: #1a365d;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 2px solid #cce0ff;
+            box-shadow: 0 4px 10px rgba(150, 180, 255, 0.2);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+        .nav-arrow-btn:hover {
+            background-color: #cce0ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(150, 180, 255, 0.4);
+        }
+
+        /* --- НИЖНИЕ КНОПКИ HOME И TASKS --- */
+        .action-buttons { 
+            display: flex; 
+            gap: 20px; 
+            width: 100%; 
+            justify-content: center; 
+        }
+        .main-btn {
+            display: block;
+            padding: 15px 40px;
+            background-color: #7a9cc6;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: background-color 0.3s;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(26, 54, 93, 0.3);
+            width: 200px;
+        }
+        .main-btn:hover { background-color: #6a8cb6; }
+        
+        .btn-tasks { background-color: #1a365d; }
+        .btn-tasks:hover { background-color: #2b4c7e; }
+    </style>
+</head>
+<body>
+
+    <!-- Декоративные круги -->
+    <div class="circle-1"></div>
+    <div class="circle-2"></div>
+
+    <h1>Factorial calculation</h1>
+
+    <div class="calc-card">
+        <div class="input-group">
+            <!-- Поле для N1 -->
+            <input type="number" id="num1" placeholder="N1" min="1">
+            <span class="symbol">!</span>
+            <span class="symbol">*</span>
+            
+            <!-- Поле для N2 -->
+            <input type="number" id="num2" placeholder="N2" min="1">
+            <span class="symbol">!</span>
+        </div>
+        
+        <div class="symbol" style="font-size: 30px; margin-bottom: 10px;">=</div>
+        
+        <!-- Вывод результата -->
+        <span id="result"></span>
+
+        <!-- Кнопка вызова расчета -->
+        <button class="calc-btn" onclick="calculateFactorials()">Calculate</button>
+    </div>
+
+    <!-- Кнопки "Назад" и "Вперед" -->
+    <div class="task-nav-buttons">
+        <a href="task0.html" class="nav-arrow-btn">← Previous Task</a>
+        <a href="task2.html" class="nav-arrow-btn">Next Task →</a>
+    </div>
+
+    <!-- Нижние кнопки Home и Tasks -->
+    <div class="action-buttons">
+        <a href="index.html" class="main-btn">Home</a>
+        <a href="tasks.html" class="main-btn btn-tasks">Tasks</a>
+    </div>
+
+    <!-- Логика на JavaScript (работает в любом браузере без сервера) -->
+    <script>
+        // Функция вычисления факториала
+        function factorial(n) {
+            if (n <= 1) return 1;
+            let result = 1;
+            for (let i = 2; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        // Функция, которая срабатывает при нажатии на кнопку
+        function calculateFactorials() {
+            // Получаем значения из полей
+            let val1 = parseInt(document.getElementById('num1').value);
+            let val2 = parseInt(document.getElementById('num2').value);
+            let resultElement = document.getElementById('result');
+
+            // Проверяем, ввел ли пользователь числа
+            if (isNaN(val1) || isNaN(val2) || val1 < 0 || val2 < 0) {
+                resultElement.textContent = "Please enter positive numbers!";
+                resultElement.style.color = "#b02a2a";
+                return;
+            }
+
+            // Считаем
+            let fact1 = factorial(val1);
+            let fact2 = factorial(val2);
+            let total = fact1 * fact2;
+
+            // Показываем результат
+            resultElement.textContent = "= " + total;
+            resultElement.style.color = "#1a365d";
+        }
+    </script>
+</body>
+</html>

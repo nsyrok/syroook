@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Anastasiya Syrakvash</title>
+    
+    <style>
+        /* --- ОБЩИЙ СИНИЙ ДИЗАЙН --- */
+        body {
+            background-color: #e6f0fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #1a365d;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Фоновые круги */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #cce0ff;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        .bg-c1 { width: 300px; height: 300px; top: 10%; left: 5%; }
+        .bg-c2 { width: 250px; height: 250px; bottom: 10%; right: 10%; }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: #1a365d;
+            text-align: center;
+        }
+
+        /* --- БЕЛАЯ КАРТОЧКА --- */
+        .about-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(150, 180, 255, 0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 40px;
+            border-top: 5px solid #cce0ff;
+            box-sizing: border-box;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Главное фото профиля (Аватарка) */
+        .profile-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #cce0ff;
+            box-shadow: 0 8px 20px rgba(150, 180, 255, 0.4);
+            margin-bottom: 20px;
+            background-color: #f5f9ff;
+        }
+
+        .profile-header h2 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            color: #1a365d;
+        }
+
+        .profile-header p {
+            font-size: 18px;
+            color: #4a7ab5;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #1a365d;
+            border-bottom: 2px solid #e6f0fa;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p, li {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            color: #1a365d;
+            font-weight: bold;
+        }
+
+        /* --- ГАЛЕРЕЯ ИЗ 3 ФОТО (без подписей) --- */
+        .photo-gallery {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            flex: 1;
+            aspect-ratio: 1 / 1; /* Квадратная форма */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background-color: #e6f0fa;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Заполняет квадрат без искажений */
+            display: block;
+        }
+
+        /* --- НИЖНИЕ КНОПКИ НАВИГАЦИИ --- */
+        .action-buttons { 
+            display: flex; 
+            gap: 15px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+        }
+        
+        .main-btn {
+            display: block;
+            padding: 15px 30px;
+            background-color: #1a365d;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(26, 54, 93, 0.2);
+            width: 180px;
+        }
+        .main-btn:hover { 
+            background-color: #2b4c7e; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(26, 54, 93, 0.3);
+        }
+
+        /* Адаптация для телефонов (фото друг под другом) */
+        @media (max-width: 600px) {
+            .photo-gallery {
+                flex-direction: column;
+            }
+            .gallery-item {
+                width: 100%;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Фоновые круги -->
+    <div class="bg-circle bg-c1"></div>
+    <div class="bg-circle bg-c2"></div>
+
+    <h1>About Me</h1>
+
+    <div class="about-card">
+        <div class="profile-header">
+            <img src="avatar.jpg" alt="Anastasiya Syrakvash" class="profile-photo">
+            
+            <h2>Anastasiya Syrakvash</h2>
+            <p>🎓 Student | 🐞 QA Tester | ✈️ Traveler | 🗣️ Language Learner</p>
+        </div>
+
+        <div class="section-title">👋 Hello!</div>
+        <p>Welcome to my portfolio website. I am a student of Group 1451, passionate about software testing, information technology, and discovering new things. This website was created as part of my coursework to showcase my lab assignments and handouts in an interactive format.</p>
+
+        <div class="section-title">💼 What I Do</div>
+        <ul>
+            <li><span class="highlight">QA Tester:</span> I enjoy finding bugs, analyzing software behavior, and ensuring high-quality user experiences.</li>
+            <li><span class="highlight">Student:</span> Currently studying various aspects of computer science, including algorithms, assembly language, and information theory.</li>
+            <li><span class="highlight">Language Learner:</span> I love exploring new languages and cultures. It helps me communicate better and broadens my perspective.</li>
+            <li><span class="highlight">Traveler:</span> Exploring new places gives me inspiration and fresh ideas.</li>
+        </ul>
+
+        <!-- ГАЛЕРЕЯ БЕЗ ПОДПИСЕЙ -->
+        <div class="photo-gallery">
+            <div class="gallery-item">
+                <img src="photo1.jpg" alt="Photo 1">
+            </div>
+            <div class="gallery-item">
+                <img src="photo2.jpg" alt="Photo 2">
+            </div>
+            <div class="gallery-item">
+                <img src="photo3.jpg" alt="Photo 3">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Нижние кнопки навигации -->
+    <div class="action-buttons">
+        <a href="index.html" class="main-btn">Home</a>
+        <a href="tasks.html" class="main-btn">Tasks</a>
+        <a href="handouts.html" class="main-btn">Handouts</a>
+    </div>
+
+</body>
+</html>

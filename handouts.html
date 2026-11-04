@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handouts - Anastasiya Syrakvash</title>
+    
+    <style>
+        /* --- ОБЩИЙ СИНИЙ ДИЗАЙН --- */
+        body {
+            background-color: #e6f0fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Фоновые круги */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #cce0ff;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        .bg-c1 { width: 300px; height: 300px; top: 10%; left: 5%; }
+        .bg-c2 { width: 250px; height: 250px; bottom: 10%; right: 10%; }
+
+        h1 { 
+            color: #1a365d; 
+            font-size: 42px; 
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        /* Контейнер для PDF */
+        .pdf-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(150, 180, 255, 0.4);
+            padding: 10px;
+            width: 90vw;
+            max-width: 1200px;
+            height: 65vh; /* Уменьшили высоту, чтобы кнопки точно влезли на экран */
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        
+        .pdf-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* Кнопка скачивания */
+        .download-btn {
+            background-color: #1a365d;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(26, 54, 93, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .download-btn:hover { 
+            background-color: #2b4c7e; 
+            transform: translateY(-2px);
+        }
+
+        /* --- КНОПКИ НАВИГАЦИИ (Одинаковый стиль) --- */
+        .action-buttons { 
+            display: flex; 
+            gap: 15px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+        }
+        
+        .main-btn {
+            display: block;
+            padding: 15px 30px;
+            background-color: #1a365d; /* Все кнопки теперь темно-синие */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(26, 54, 93, 0.2);
+            width: 160px;
+            border: 2px solid transparent;
+        }
+        .main-btn:hover { 
+            background-color: #2b4c7e; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(26, 54, 93, 0.3);
+        }
+        
+        /* Если захотите выделить кнопку Home, раскомментируйте этот блок */
+        /*
+        .btn-home { 
+            background-color: #7a9cc6; 
+        }
+        .btn-home:hover { 
+            background-color: #6a8cb6; 
+        }
+        */
+    </style>
+</head>
+<body>
+
+    <!-- Фоновые круги -->
+    <div class="bg-circle bg-c1"></div>
+    <div class="bg-circle bg-c2"></div>
+
+    <h1>My Handouts</h1>
+    
+    <!-- Контейнер для PDF -->
+    <div class="pdf-container">
+        <iframe src="Handouts.pdf" type="application/pdf"></iframe>
+    </div>
+
+    <!-- Кнопка скачивания -->
+    <a href="Handouts.pdf" download class="download-btn">📥 Download handouts (PDF)</a>
+
+    <!-- Кнопки навигации (Home, Tasks, About Me) -->
+    <div class="action-buttons">
+        <!-- Если захотите сделать Home светлой, добавьте class="btn-home" -->
+        <a href="index.html" class="main-btn">Home</a>
+        <a href="tasks.html" class="main-btn">Tasks</a>
+        <a href="about.html" class="main-btn">About Me</a>
+    </div>
+
+</body>
+</html>

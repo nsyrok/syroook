@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nash Equilibrium - Task 7</title>
+    
+    <style>
+        /* --- BLUE DESIGN --- */
+        body {
+            background-color: #e6f0fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            overflow-x: hidden;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* Background circles */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #cce0ff;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        .bg-c1 { width: 250px; height: 250px; top: 10%; left: 5%; }
+        .bg-c2 { width: 300px; height: 300px; bottom: 5%; right: 10%; }
+
+        h1 {
+            color: #1a365d;
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .description {
+            max-width: 700px;
+            text-align: center;
+            color: #4a7ab5;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .calc-card {
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(150, 180, 255, 0.4);
+            padding: 40px 50px;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+
+        .run-btn {
+            background-color: #1a365d;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .run-btn:hover { background-color: #2b4c7e; transform: scale(1.02); }
+
+        /* Results Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #1a365d;
+        }
+
+        th {
+            background-color: #f5f9ff;
+            padding: 12px;
+            border: 2px solid #cce0ff;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 12px;
+            border: 2px solid #cce0ff;
+            text-align: center;
+        }
+
+        /* Hidden explanation block */
+        .explanation {
+            margin-top: 20px;
+            background-color: #e6f0fa;
+            padding: 20px;
+            border-radius: 15px;
+            color: #1a365d;
+            display: none;
+            text-align: left;
+            border-left: 5px solid #1a365d;
+        }
+        .explanation h3 { margin-top: 0; color: #2b4c7e; }
+
+        /* --- КНОПКИ ПЕРЕКЛЮЧЕНИЯ ЗАДАНИЙ (PREV / NEXT) --- */
+        .task-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        
+        .nav-arrow-btn {
+            background-color: white;
+            color: #1a365d;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 2px solid #cce0ff;
+            box-shadow: 0 4px 10px rgba(150, 180, 255, 0.2);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+        .nav-arrow-btn:hover {
+            background-color: #cce0ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(150, 180, 255, 0.4);
+        }
+
+        /* --- НИЖНИЕ КНОПКИ HOME И TASKS --- */
+        .action-buttons { 
+            display: flex; 
+            gap: 20px; 
+            width: 100%; 
+            justify-content: center; 
+        }
+        .main-btn {
+            display: block;
+            padding: 15px 40px;
+            background-color: #7a9cc6;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: background-color 0.3s;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(26, 54, 93, 0.3);
+            width: 200px;
+        }
+        .main-btn:hover { background-color: #6a8cb6; }
+        
+        .btn-tasks { background-color: #1a365d; }
+        .btn-tasks:hover { background-color: #2b4c7e; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-circle bg-c1"></div>
+    <div class="bg-circle bg-c2"></div>
+
+    <h1>Nash Equilibrium</h1>
+    <p class="description">
+        This simulation demonstrates the logic of the Prisoner's Dilemma. Two players independently decide whether to confess. Their behavior illustrates Nash Equilibrium — a state where no player benefits from changing their strategy alone.
+    </p>
+
+    <div class="calc-card">
+        <button class="run-btn" onclick="runSimulation()">Run Simulation</button>
+
+        <!-- Results Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Person:</th>
+                    <th>Crime:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Player A</td>
+                    <td id="result-a">-</td>
+                </tr>
+                <tr>
+                    <td>Player B</td>
+                    <td id="result-b">-</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Explanation block -->
+        <div class="explanation" id="explanation">
+            <h3>Simulation Result:</h3>
+            <p id="explanation-text"></p>
+        </div>
+    </div>
+
+    <!-- Кнопки "Назад" и "Вперед" -->
+    <div class="task-nav-buttons">
+        <a href="task6.html" class="nav-arrow-btn">← Previous Task</a>
+        <a href="tasks.html" class="nav-arrow-btn">All Tasks →</a>
+    </div>
+
+    <!-- Нижние кнопки Home и Tasks -->
+    <div class="action-buttons">
+        <a href="index.html" class="main-btn">Home</a>
+        <a href="tasks.html" class="main-btn btn-tasks">Tasks</a>
+    </div>
+
+    <script>
+        function runSimulation() {
+            // Possible actions
+            const actions = ["Confess", "Silent"];
+            
+            // Random choice for each player (0 or 1)
+            let choiceA = Math.floor(Math.random() * 2);
+            let choiceB = Math.floor(Math.random() * 2);
+
+            let actionA = actions[choiceA];
+            let actionB = actions[choiceB];
+
+            // Display choices in the table
+            document.getElementById('result-a').textContent = actionA;
+            document.getElementById('result-b').textContent = actionB;
+
+            // Explanation logic (Why this is Nash Equilibrium)
+            let expText = "";
+            
+            if (choiceA === 0 && choiceB === 0) {
+                expText = "Both players confessed. This is the <b>Nash Equilibrium</b>. If one of them changes their mind and stays silent while the other confesses, they will receive a harsher sentence. Therefore, no one benefits from unilaterally changing their strategy.";
+            } else if (choiceA === 1 && choiceB === 1) {
+                expText = "Both players remained silent. This is <b>not</b> a Nash Equilibrium, because each of them is secretly tempted to confess to get a lighter sentence (betray the other).";
+            } else {
+                expText = "One confessed, the other remained silent. The one who stayed silent loses (gets a longer sentence). If they knew the other would confess, they would confess too. This state is unstable.";
+            }
+
+            // Show explanation block
+            document.getElementById('explanation-text').innerHTML = expText;
+            document.getElementById('explanation').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

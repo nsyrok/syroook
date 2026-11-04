@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitwise operations - Task 2</title>
+    
+    <style>
+        /* --- ОБЩИЙ СИНИЙ ДИЗАЙН --- */
+        body {
+            background-color: #e6f0fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: relative;
+            overflow-x: hidden;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* Декоративные круги на фоне */
+        .circle-1, .circle-2 {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #cce0ff;
+            opacity: 0.6;
+            z-index: -1;
+        }
+        .circle-1 { width: 250px; height: 250px; top: 15%; left: 15%; }
+        .circle-2 { width: 350px; height: 350px; bottom: -10%; right: 10%; }
+
+        h1 {
+            color: #1a365d;
+            font-size: 42px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .calc-card {
+            background-color: white;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(150, 180, 255, 0.4);
+            padding: 40px 50px;
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* Поля ввода */
+        input[type="number"] {
+            width: 70px;
+            padding: 12px;
+            border: 2px solid #cce0ff;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+            color: #1a365d;
+            outline: none;
+        }
+        input[type="number"]:focus { border-color: #4a7ab5; }
+        
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Символы операций (& | ^) */
+        .symbols-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 20px;
+            color: #1a365d;
+            font-weight: bold;
+        }
+
+        /* Кнопка Calculate */
+        .calc-btn {
+            background-color: #cce0ff;
+            color: #1a365d;
+            border: none;
+            padding: 12px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .calc-btn:hover { background-color: #a3c4ff; }
+
+        /* Блок для вывода результатов */
+        .results {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+            color: #1a365d;
+            line-height: 1.8;
+            background-color: #f5f9ff;
+            padding: 15px;
+            border-radius: 15px;
+            display: none;
+        }
+        .results span { font-weight: bold; color: #2b4c7e; }
+
+        /* --- КНОПКИ ПЕРЕКЛЮЧЕНИЯ ЗАДАНИЙ (PREV / NEXT) --- */
+        .task-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        
+        .nav-arrow-btn {
+            background-color: white;
+            color: #1a365d;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 2px solid #cce0ff;
+            box-shadow: 0 4px 10px rgba(150, 180, 255, 0.2);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+        .nav-arrow-btn:hover {
+            background-color: #cce0ff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(150, 180, 255, 0.4);
+        }
+
+        /* --- НИЖНИЕ КНОПКИ HOME И TASKS --- */
+        .action-buttons { 
+            display: flex; 
+            gap: 20px; 
+            width: 100%; 
+            justify-content: center; 
+        }
+        .main-btn {
+            display: block;
+            padding: 15px 40px;
+            background-color: #7a9cc6;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: background-color 0.3s;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(26, 54, 93, 0.3);
+            width: 200px;
+        }
+        .main-btn:hover { background-color: #6a8cb6; }
+        
+        .btn-tasks { background-color: #1a365d; }
+        .btn-tasks:hover { background-color: #2b4c7e; }
+    </style>
+</head>
+<body>
+
+    <!-- Декоративные круги -->
+    <div class="circle-1"></div>
+    <div class="circle-2"></div>
+
+    <h1>Bitwise operations</h1>
+
+    <div class="calc-card">
+        <div class="input-group">
+            <input type="number" id="num1" placeholder="N1">
+            
+            <div class="symbols-container">
+                <span>&</span>
+                <span>|</span>
+                <span>^</span>
+            </div>
+            
+            <input type="number" id="num2" placeholder="N2">
+        </div>
+        
+        <button class="calc-btn" onclick="calculateBitwise()">Calculate</button>
+
+        <div class="results" id="results">
+            <div>AND (&): <span id="res-and">0</span></div>
+            <div>OR (|): <span id="res-or">0</span></div>
+            <div>XOR (^): <span id="res-xor">0</span></div>
+        </div>
+    </div>
+
+    <!-- Кнопки "Назад" и "Вперед" (в один ряд) -->
+    <div class="task-nav-buttons">
+        <a href="task1.html" class="nav-arrow-btn">← Previous Task</a>
+        <a href="task3.html" class="nav-arrow-btn">Next Task →</a>
+    </div>
+
+    <!-- Нижние кнопки Home и Tasks -->
+    <div class="action-buttons">
+        <a href="index.html" class="main-btn">Home</a>
+        <a href="tasks.html" class="main-btn btn-tasks">Tasks</a>
+    </div>
+
+    <script>
+        function calculateBitwise() {
+            let val1 = parseInt(document.getElementById('num1').value);
+            let val2 = parseInt(document.getElementById('num2').value);
+            
+            if (isNaN(val1) || isNaN(val2)) {
+                alert("Please enter both numbers!");
+                return;
+            }
+
+            let resAnd = val1 & val2;
+            let resOr = val1 | val2;
+            let resXor = val1 ^ val2;
+
+            document.getElementById('res-and').textContent = resAnd;
+            document.getElementById('res-or').textContent = resOr;
+            document.getElementById('res-xor').textContent = resXor;
+
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
